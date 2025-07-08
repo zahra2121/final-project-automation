@@ -30,21 +30,21 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run Tests API
-        run: ./gradlew apiTest
+        run: ./gradlew testApi
 
       - name: Run Tests Web UI
-        run: ./gradlew webTest
+        run: ./gradlew testWeb
 
       - name: Archive API test results
         uses: actions/upload-artifact@v4.3.0
         if: always() #always() # success() , failure(), canceled()
         with:
           name: API Test reports
-          path: build/reports/tests/apiTest  # Path to test reports
+          path: build/reports/tests/testApi  # Path to test reports
 
       - name: Archive Web test results
         uses: actions/upload-artifact@v4.3.0
         if: always() #always() # success() , failure(), canceled()
         with:
           name: Web Test reports
-          path: target/cucumber-endtoend-reports.html  # Path to test reports
+          path: target/web-report.html  # Path to test reports
