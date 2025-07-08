@@ -2,18 +2,48 @@ plugins {
     id 'java'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group = 'com.example'
+version = '1.0'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'io.cucumber:cucumber-java:7.15.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.15.0'
+    testImplementation 'io.cucumber:cucumber-picocontainer:7.15.0'
+    testImplementation 'com.google.code.gson:gson:2.10'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.20.0'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
+    testImplementation 'net.masterthought:cucumber-reporting:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+
+
 }
 
+
 test {
-    useJUnitPlatform()
+    systemProperties = System.getProperties()
+    reports {
+        junitXml.required.set(true)
+        html.required.set(true)
+    }
 }
+
+tasks.register("testApi", Test) {
+    useJUnit()
+    systemProperty "cucumber.filter.tags", "@api"
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+tasks.register("testWeb", Test) {
+    useJUnit()
+    systemProperty "cucumber.filter.tags", "@web"
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+
