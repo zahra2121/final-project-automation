@@ -19,7 +19,7 @@ Feature: User API
     And response should contain "<field>"
     Examples:
       | firstName | lastName | email                       | statusCode | field |
-      | Jeruk     | Alan    | jerukalana1123@example.com   | 200        | id    |
+      | Jeruk     | Alan    | jeruknipis23@example.com   | 200        | id    |
 
 
   @api
@@ -40,7 +40,7 @@ Feature: User API
     Then the response status code should be <statusCode>
     Examples:
       | id                       | statusCode |
-      | 60d0fe4f5311236168a109d5 | 200        |
+      | 60d0fe4f5311236168a109ce | 200        |
 
   @api @negative
   Scenario Outline: Get user with invalid ID
